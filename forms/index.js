@@ -9,25 +9,34 @@ setTimeout(function(){
 
 modalCloseBtn.addEventListener('click', function(){
     modal.style.display = 'none'
+}) 
+
+/*   
+Challenge: 
+1. Take control of the decline btn. (What do you
+   need to do to make that possible?)
+2. Set up an eventListener that is triggered 
+   when a user's cursor hovers over the decline 
+   button. (Google the event to listen out for!) mouseover, mouseout
+3. For now, just log out "hovered" when that 
+   happens. 
+*/ 
+
+const declineBtn = document.getElementById("decline-btn")
+
+declineBtn.addEventListener("mouseover", function(){
+    console.log("mouse hovered")
+    
+    
 })
+
+
 
 consentForm.addEventListener('submit', function(e){
     e.preventDefault()
     
     const consentFormData = new FormData(consentForm)
-    console.log(consentFormData)
-
-    const name = consentFormData.get("fullName")
-/*   
-Challenge: 
-1. Create a const to store the user's name and
-   use a FormData method to extract the 
-   submitted name from the FormData object.
-2. Insert the user's name into the HTML string
-   that contains the final message we show our
-   users.
-*/ 
-    
+    const fullName = consentFormData.get('fullName')
     
     modalText.innerHTML = `
     <div class="modal-inner-loading">
@@ -43,12 +52,13 @@ Challenge:
     
     setTimeout(function(){
         document.getElementById('modal-inner').innerHTML = `
-        <h2>Thanks <span class="modal-display-name">${name}</span>, you sucker! </h2>
+        <h2>Thanks <span class="modal-display-name">${fullName}</span>, you sucker! </h2>
         <p>We just sold the rights to your eternal soul.</p>
         <div class="idiot-gif">
             <img src="images/pirate.gif">
         </div>
     `
+    modalCloseBtn.disabled = false
     }, 3000)
   
 }) 
